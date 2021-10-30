@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node src/app.ts | ./node_modules/.bin/bunyan",
-    "test": "jest",
+    "test": "jest -c jest.config.ts",
     "lint": "npx eslint src",
     "format": "npx prettier --write .",
     "check": "npx prettier --check .",
