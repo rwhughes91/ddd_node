@@ -21,6 +21,8 @@
     "typeRoots": ["src/@types", "./node_modules/@types"],
     "baseUrl": "./" /* Base directory to resolve non-absolute module names. */,
     "paths": {
+      "@adapters/*": ["src/adapters/*"],
+      "@app/*": ["src/app/*"],
       "@domain/*": ["src/domain/*"]
     },
     "plugins": [
