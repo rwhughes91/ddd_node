@@ -21,8 +21,7 @@
     "typeRoots": ["src/@types", "./node_modules/@types"],
     "baseUrl": "./" /* Base directory to resolve non-absolute module names. */,
     "paths": {
-      "@models": ["./src/models/index"],
-      "@models/*": ["./src/models/*"]
+      "@domain/*": ["src/domain/*"]
     },
     "plugins": [
       { "transform": "typescript-transform-paths" },

@@ -18,6 +18,7 @@
   "dependencies": {
     "bunyan": "^1.8.15",
     "cors": "^2.8.5",
+    "dataclass": "^2.0.0",
     "express": "^4.17.1",
     "helmet": "^4.6.0"
   },
@@ -42,6 +43,7 @@
     "supertest": "^6.1.6",
     "ts-jest": "^27.0.7",
     "ts-node": "^10.4.0",
-    "typescript": "^4.4.4"
+    "typescript": "^4.4.4",
+    "typescript-transform-paths": "^3.3.1"
   }
 }
