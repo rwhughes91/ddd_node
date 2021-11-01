@@ -7,14 +7,16 @@ export class InMemoryRepository implements IRepository {
   constructor(batches?: Batch[]) {
     this._batches = batches ?? [];
   }
+
   add(batch: Batch) {
     this._batches.push(batch);
   }
-  get(reference: string) {
+
+  async get(reference: string) {
     return this._batches.find((batch) => batch.reference === reference);
   }
 
-  list() {
+  async list() {
     return this._batches;
   }
 }
