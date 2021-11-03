@@ -1,12 +1,28 @@
-import { InMemoryRepository } from '@adapters/repositories';
+import { SqlRepository } from '@adapters/repositories';
 import { Batch } from '@domain/models';
+import { Sequelize } from 'sequelize';
 
-describe('Adapters - Repository - InMemoryRepository', () => {
-  let repository: InMemoryRepository;
+const sequelize = new Sequelize('sqlite::memory:', { logging: false });
+
+describe('Adapters - Repository - SqlRepository', () => {
+  let repository: SqlRepository;
   const batch = new Batch('my-batch', 'CHAIR', 10);
 
-  beforeEach(() => {
-    repository = new InMemoryRepository([batch]);
+  beforeAll(async () => {
+    repository = new SqlRepository(sequelize);
+    await sequelize.sync({ force: true });
+  });
+
+  afterAll(async () => {
+    await sequelize.close();
+  });
+
+  beforeEach(async () => {
+    await repository.add(batch);
+  });
+
+  afterEach(async () => {
+    await repository.entities.BatchEntity.truncate();
   });
 
   test('can get all batches', async () => {
@@ -26,6 +42,6 @@ describe('Adapters - Repository - InMemoryRepository', () => {
     expect(batches.length).toBe(2);
 
     const newBatch = await repository.get('my-new-batch');
-    expect(newBatch).toBe(batch);
+    expect(newBatch).toEqual(batch);
   });
 });

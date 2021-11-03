@@ -1,4 +1,4 @@
-import { IRepository } from '@app/interfaces';
+import { IRepository } from '@app/ports';
 import { Batch } from '@domain/models';
 
 export class InMemoryRepository implements IRepository {
@@ -8,12 +8,16 @@ export class InMemoryRepository implements IRepository {
     this._batches = batches ?? [];
   }
 
-  add(batch: Batch) {
+  async add(batch: Batch) {
     this._batches.push(batch);
   }
 
   async get(reference: string) {
     return this._batches.find((batch) => batch.reference === reference);
+  }
+
+  async remove(reference: string) {
+    this._batches.filter((batch) => batch.reference !== reference);
   }
 
   async list() {

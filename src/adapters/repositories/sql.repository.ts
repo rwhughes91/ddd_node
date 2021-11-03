@@ -1,4 +1,4 @@
-import { IRepository } from '@app/interfaces';
+import { IRepository } from '@app/ports';
 import { Batch } from '@domain/models';
 import { DataTypes, Model, ModelCtor, Sequelize } from 'sequelize';
 
@@ -39,6 +39,10 @@ export class SqlRepository implements IRepository {
     if (batch) return this._instantiate_batch(batch);
   }
 
+  async remove(reference: string) {
+    await this.entities.BatchEntity.destroy({ where: { reference } });
+  }
+
   async list() {
     const batches = await this.entities.BatchEntity.findAll();
     return batches.map((batch) => this._instantiate_batch(batch));
@@ -46,10 +50,15 @@ export class SqlRepository implements IRepository {
 
   private _instantiate_batch(batch: BatchEntity) {
     let eta;
-    if (batch._attributes.eta) {
-      eta = new Date(batch._attributes.eta);
+    const etaBatch = batch.get('eta') as string;
+    if (etaBatch) {
+      eta = new Date(etaBatch);
     }
-    return new Batch(batch._attributes.reference, batch._attributes.sku, batch._attributes.qty, eta);
+    const reference = batch.get('reference') as string;
+    const sku = batch.get('sku') as string;
+    const qty = batch.get('qty') as number;
+
+    return new Batch(reference, sku, qty, eta);
   }
 
   private _register_models() {
