@@ -1,7 +1,7 @@
 import { IRepository } from '@app/ports';
 import { Batch } from '@domain/models';
 
-export class InMemoryRepository implements IRepository {
+export class InMemoryBatchRepository implements IRepository {
   private readonly _batches: Batch[];
 
   constructor(batches?: Batch[]) {
