@@ -15,6 +15,10 @@ export class Batch {
     this._purchased_quantity = qty;
   }
 
+  get purchased_quantity() {
+    return this._purchased_quantity;
+  }
+
   get allocated_quantity() {
     let sum = 0;
     this._allocations.forEach((orderLine: OrderLine) => (sum += orderLine.qty));

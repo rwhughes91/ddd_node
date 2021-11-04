@@ -10,6 +10,8 @@ const config: Config.InitialOptions = {
   testRegex: 'test.ts',
   setupFiles: [],
   moduleNameMapper: {
+    '^@adapters/(.*)$': '<rootDir>/src/adapters/$1',
+    '^@app/(.*)$': '<rootDir>/src/app/$1',
     '^@domain/(.*)$': '<rootDir>/src/domain/$1',
   },
 };

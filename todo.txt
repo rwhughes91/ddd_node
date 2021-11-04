@@ -1,0 +1,2 @@
+1. set up DB in docker and sequelize envs
+2. write tests
