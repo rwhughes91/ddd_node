@@ -1,8 +1,6 @@
-import { Batch } from '@domain/models';
-
-export interface IRepository {
-  add(batch: Batch): Promise<void>;
-  get(reference: string): Promise<Batch | undefined>;
-  remove(reference: string): Promise<void>;
-  list(): Promise<Batch[]>;
+export interface IRepository<T> {
+  add(batch: T): Promise<void>;
+  get(ref: string | number): Promise<T | undefined>;
+  remove(ref: string | number): Promise<void>;
+  list(): Promise<T[]>;
 }
