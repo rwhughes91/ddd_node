@@ -2,7 +2,7 @@ import { Batch } from '@domain/models';
 
 import { BatchEntityType } from './models/batch';
 
-export class BatchMapper {
+export class BatchMap {
   static toDomain(batch: BatchEntityType): Batch {
     let eta;
     const etaBatch = batch.get('eta') as string;
