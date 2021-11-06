@@ -1,12 +1,17 @@
+import { OrderLineInputDTO } from '@app/dtos';
 import { InvalidSku } from '@app/errors';
 import { IRepository } from '@app/interfaces';
-import { Batch, OrderLine } from '@domain/models';
+import { OrderLineMap } from '@app/mappers';
+import { Batch } from '@domain/models';
 import { allocate } from '@domain/services';
 
-export const allocateOrderLine = async (line: OrderLine, repo: IRepository<Batch>) => {
+const orderLineMap = new OrderLineMap();
+
+export const allocateOrderLine = async (line: OrderLineInputDTO, repo: IRepository<Batch>) => {
+  const orderLine = orderLineMap.toDomain(line);
   const batches = await repo.list();
-  if (!isValidSku(line.sku, batches)) throw new InvalidSku(`Invalid sku ${line.sku}`);
-  const batchRef = allocate(line, batches);
+  if (!isValidSku(orderLine.sku, batches)) throw new InvalidSku(`Invalid sku ${line.sku}`);
+  const batchRef = allocate(orderLine, batches);
   return batchRef;
 };
 

@@ -1,18 +1,6 @@
+import { OrderLineInputDTO, OrderLineOutputDTO } from '@app/dtos';
+import { IMap } from '@app/interfaces';
 import { OrderLine } from '@domain/models';
-
-import { IMap } from '../interfaces';
-
-interface OrderLineInputDTO {
-  orderId: string;
-  sku: string;
-  qty: number;
-}
-
-interface OrderLineOutputDTO {
-  orderId: string;
-  sku: string;
-  qty: number;
-}
 
 export class OrderLineMap implements IMap<OrderLineInputDTO, OrderLine, OrderLineOutputDTO> {
   toDomain(orderLineDTO: OrderLineInputDTO): OrderLine {
