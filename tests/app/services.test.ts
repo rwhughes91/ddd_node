@@ -3,7 +3,7 @@ import { InvalidSku } from '@app/errors';
 import { allocateOrderLine } from '@app/services';
 import { Batch, OrderLine } from '@domain/models';
 
-describe('App - services - allocate', () => {
+describe('App - services - order', () => {
   let orderLine: OrderLine;
   let repo: InMemoryBatchRepository;
 
