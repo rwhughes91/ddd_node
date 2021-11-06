@@ -1,4 +1,4 @@
-import { IRepository } from '@app/ports';
+import { IRepository } from '@app/interfaces';
 import { Batch } from '@domain/models';
 
 export class InMemoryBatchRepository implements IRepository<Batch> {

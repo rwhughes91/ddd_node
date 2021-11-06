@@ -1,8 +1,7 @@
+import { InvalidSku } from '@app/errors';
+import { IRepository } from '@app/interfaces';
 import { Batch, OrderLine } from '@domain/models';
 import { allocate } from '@domain/services';
-
-import { InvalidSku } from './errors';
-import { IRepository } from './ports';
 
 export const allocateOrderLine = async (line: OrderLine, repo: IRepository<Batch>) => {
   const batches = await repo.list();
